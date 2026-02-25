@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,18 @@ class PostController extends Controller
     // $post = Post::find(1);
     //    dd ($post);
 
-    $posts = Post::all();
+    // $posts = Post::all();
 
-    return view('post.index', compact('posts'));
+    $post = Post::find(1);
+    dd($post->category);
+
+    // $category = Category::find(1);
+    // dd($category->posts);
+
+    // $post =Post::where('category_id', $category->id)->get();
+    // dd($post);
+
+    // return view('post.index', compact('posts'));
 
 //     foreach($posts as $post){
 //         dump($post->title);
@@ -120,8 +130,8 @@ public function update(Post $post){
 // ------------------------------------------------
 
 public function destroy(Post $post){
-    $post->detete();
-    return redirect()->route('post.index')
+    $post->delete();
+    return redirect()->route('post.index');
 }
 
 // public function update()

@@ -12,19 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('posts', function (Blueprint $table) {
-    $table->id();
-    $table->string('title');
-    $table->text('content');
-    $table->string('image')->nullable();
-    $table->unsignedBigInteger('likes')->nullable();
-    $table->boolean('is_published')->default(1);
-    $table->timestamps();
+            $table->id();
+            $table->string('title');
+            $table->text('content');
+            $table->string('image')->nullable();
+            $table->unsignedBigInteger('likes')->nullable();
+            $table->boolean('is_published')->default(1);
+            $table->timestamps();
 
-    $table->softDeletes();
+            $table->softDeletes();
+
+            $table->unsignedBigInteger('category_id')->nullable();
+
+            $table->index('category_id',name: 'post_category_id' );
+
+            $table->foreign('category_id', name:'post_category_fk')->on('categories')->references('id');
 });
 
     }
-
     /**
      * Reverse the migrations.
      */
