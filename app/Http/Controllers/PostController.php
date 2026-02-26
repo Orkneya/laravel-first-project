@@ -113,12 +113,12 @@ class PostController extends Controller
         unset($data['tags']);
         // dd($tags, $data);
         $post = Post::create($data);
-        foreach ($tags as $tag) {
-            PostTag::firstOrCreate([
-                'tag_id' => $tag,
-                'post_id' => $post->id,
-            ]);
-        }
+        // foreach ($tags as $tag) {
+        //     PostTag::firstOrCreate([
+        //         'tag_id' => $tag,
+        //         'post_id' => $post->id,
+        //     ]);
+        // }
 
 
         return redirect()->route('post.index');
