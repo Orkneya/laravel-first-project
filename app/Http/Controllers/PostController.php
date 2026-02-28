@@ -102,7 +102,7 @@ class PostController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'title' => 'string',
+            'title' => 'required|string',
             'content' => 'string',
             'image' => 'string',
             'category_id' => '',
@@ -112,6 +112,7 @@ class PostController extends Controller
         $tags = $data['tags'];
         unset($data['tags']);
         // dd($tags, $data);
+
         $post = Post::create($data);
         // foreach ($tags as $tag) {
         //     PostTag::firstOrCreate([
@@ -119,6 +120,8 @@ class PostController extends Controller
         //         'post_id' => $post->id,
         //     ]);
         // }
+
+        $post->tags()->attach($tags);
 
 
         return redirect()->route('post.index');
@@ -135,7 +138,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('post.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('post.edit', compact('post', 'categories', 'tags'));
     }
     //  ----------------------------------------------------------
     public function update(Post $post)
@@ -145,10 +149,16 @@ class PostController extends Controller
             'content' => 'string',
             'image' => 'string',
             'category_id' => '',
+            'tags' => '',
         ]);
+
+        $tags = $data['tags'];
+        unset($data['tags']);
 
         // Post::update($data);
         $post->update($data);
+        $post->tags()->sync($tags);
+        // $post = $post->fresh();
         return redirect()->route('post.show', $post->id);
     }
 
