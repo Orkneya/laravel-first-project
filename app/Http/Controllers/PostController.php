@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
-use App\Models\PostTag;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -17,7 +16,15 @@ class PostController extends Controller
         // $post = Post::find(1);
         //    dd ($post);
 
-        $posts = Post::all();
+        // $posts = Post::all();
+        $post = Post::find(1);
+        $category = Category::find(1);
+        $tag = Tag::find(1);
+
+        // dd($post->category);
+        // dd($category->posts);
+        // dd($tag->posts);
+        dd($post->tags);
 
         // $post = Post::find(1);
         // dd($post->category);

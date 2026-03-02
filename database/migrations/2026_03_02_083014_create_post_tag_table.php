@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('toys', function (Blueprint $table) {
+        Schema::create('post_tag', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->float('price');
-            $table->text('content');
-            $table->string('image')->nullable();
-            $table->unsignedBigInteger('likes')->nullable();
+
+            $table->unsignedBigInteger('post_id');
+            $table->unsignedBigInteger('tag_id');
+
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('toys');
+        Schema::dropIfExists('post_tag');
     }
 };

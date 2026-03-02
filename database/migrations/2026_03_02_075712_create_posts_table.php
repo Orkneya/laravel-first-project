@@ -14,22 +14,17 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('content');
-            $table->string('image')->nullable();
+            $table->string('content');
+            $table->string('image');
             $table->unsignedBigInteger('likes')->nullable();
-            $table->boolean('is_published')->default(1);
+            $table->string('is_published')->default(1);
             $table->timestamps();
-
             $table->softDeletes();
 
-            $table->unsignedBigInteger('category_id')->nullable();
-
-            $table->index('category_id',name: 'post_category_id' );
-
-            $table->foreign('category_id', name:'post_category_fk')->on('categories')->references('id');
-});
-
+            $table->unsignedBigInteger('category_id');
+        });
     }
+
     /**
      * Reverse the migrations.
      */
