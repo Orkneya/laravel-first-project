@@ -11,28 +11,16 @@ class PostController extends Controller
 {
     public function index()
     {
-        // $post = Post::find(1);
-        //    dd ($post);
-        // $post = Post::find(1);
-        //    dd ($post);
-
         // $posts = Post::all();
         $post = Post::find(1);
         $category = Category::find(1);
+        // dd($category->posts);
         $tag = Tag::find(1);
+        // dd($tag->posts);
 
         // dd($post->category);
-        // dd($category->posts);
-        // dd($tag->posts);
+
         dd($post->tags);
-
-        // $post = Post::find(1);
-        // dd($post->category);
-        // $tag = Tag::find(2);
-        // dd($tag->posts);
-
-        // $category = Category::find(1);
-        // dd($category->posts);
 
         // $post =Post::where('category_id', $category->id)->get();
         // dd($post);
